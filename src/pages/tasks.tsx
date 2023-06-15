@@ -1,42 +1,40 @@
-import React, { ChangeEvent, useRef } from 'react';
+import { useTaskManager } from "@/store/useTaskManager";
+import React, { ChangeEvent, useRef } from "react";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 interface Task {
-  id: number,
-  title: string,
-  completed: boolean,
+  id: number;
+  title: string;
+  completed: boolean;
 }
 
 const TaskManager = () => {
-  // const createTaskRef = ...:
-  // const {
-  //   tasks,
-  //   searchTask,
-  //   addTask,
-  //   updateTask,
-  //   deleteTask,
-  //   setSearchTask,
-  // } = useTaskManager();
+  const addTask = useTaskManager((state: any) => state.addTask);
+  const deleteTask = useTaskManager((state: any) => state.deleteTask);
+  const updateTask = useTaskManager((state: any) => state.updateTask);
+  const searchTask = useTaskManager((state: any) => state.searchTask);
+  const setSearchTask = useTaskManager((state: any) => state.setSearchTask);
 
   const handleAddTask = () => {
-    const title = ""; // Replace with the value in the createTaskRef 
+    const title = ""; // Replace with the value in the createTaskRef
     const newTask = {
       id: Date.now(),
       title,
       completed: false,
     };
-    // addTask(newTask);
+    addTask(newTask);
   };
 
   const handleUpdateTask = (taskId: number, updatedTask: Task) => {
-    // updateTask(taskId, updatedTask);
+    updateTask(taskId, updatedTask);
   };
 
   const handleDeleteTask = (taskId: number) => {
-    // deleteTask(taskId);
+    deleteTask(taskId);
   };
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
-    // setSearchTask(e.target.value);
+    setSearchTask(e.target.value);
   };
 
   // See! I already give you everything!
@@ -48,7 +46,7 @@ const TaskManager = () => {
     <div>
       <h1>Task Manager</h1>
 
-      <input type="text" /*ref={}*//>
+      <input type="text" /*ref={}*/ />
 
       <button onClick={handleAddTask}>Add Task</button>
 
